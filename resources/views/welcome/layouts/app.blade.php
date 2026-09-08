@@ -19,7 +19,7 @@
      <!-- Google Font Outfit-->
      <link rel="preconnect" href="https://fonts.googleapis.com" />
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-     <link href="../../../fonts.googleapis.com/css2_d6b0264.css" rel="stylesheet" />
+     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
      <!-- Font Awesome-->
      <link rel="stylesheet" type="text/css" href="{{assetUrl('public/welcome/assets/css/vendors/fontawesome.css')}}" />
      <!-- Iconsax icon-->

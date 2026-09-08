@@ -75,24 +75,21 @@ function stripPublicFromAssets(){
     return (bool) $cfg;
   }
 
-  static $auto = null;
-  if ($auto !== null) {
-    return $auto;
-  }
+  $norm = fn ($p) => $p !== '' ? rtrim(str_replace('\\', '/', $p), '/') : '';
 
-  $docroot = isset($_SERVER['DOCUMENT_ROOT'])
-    ? rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']), '/')
-    : '';
-
+  $docroot = $norm($_SERVER['DOCUMENT_ROOT'] ?? '');
   if ($docroot === '') {
-    // CLI / queue — assume the framework's own server (docroot = public/)
-    return $auto = true;
+    return true; // CLI / queue
   }
 
-  $publicPath = str_replace('\\', '/', realpath(public_path()) ?: public_path());
-  $publicPath = rtrim($publicPath, '/');
+  $publicPath = $norm(realpath(public_path()) ?: public_path());
+  $basePath   = $norm(realpath(base_path()) ?: base_path());
 
-  return $auto = ($docroot === $publicPath) || str_ends_with($docroot, '/public');
+  if ($docroot === $publicPath)           return true;  // docroot = public/  -> strip
+  if (str_ends_with($docroot, '/public')) return true;
+  if ($docroot === $basePath)             return false; // docroot = project root -> keep "public/"
+
+  return true; // unknown layout -> assume a standard Laravel (public/) docroot
 }
 
 /**
