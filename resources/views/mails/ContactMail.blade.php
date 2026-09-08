@@ -116,7 +116,13 @@
                 <div class="info-row"><strong>Name:</strong> {{ $datas['r']['name'] }}</div>
                 <div class="info-row"><strong>Email:</strong> {{ $datas['r']['email'] }}</div>
                 <div class="info-row"><strong>Mobile:</strong> {{ $datas['r']['mobile'] }}</div>
+                @if(!empty($datas['r']['company']))
+                <div class="info-row"><strong>Company:</strong> {{ $datas['r']['company'] }}</div>
+                @endif
                 <div class="info-row"><strong>Subject:</strong> {{ $datas['r']['subject'] ?? 'N/A' }}</div>
+                @if(!empty($datas['r']['quantity']))
+                <div class="info-row"><strong>Quantity:</strong> {{ $datas['r']['quantity'] }}</div>
+                @endif
             </div>
 
             <div class="message-box">

@@ -598,8 +598,10 @@ class WelcomeController extends Controller
       //our Brands
       if($page->template=='All Brands'){
 
-        $brands=Attribute::latest()->where('type',2)->where('status','active')->limit(20)->get();
-           
+        $brands=Attribute::where('type',2)->where('status','active')->whereNull('parent_id')
+                ->orderBy('name')
+                ->paginate(24);
+
         return view(welcomeTheme().'pages.allBrands',compact('page','brands'));
       }
       
@@ -679,7 +681,7 @@ class WelcomeController extends Controller
         $products = Post::latest()->where('type',2)->where('status','active')
         //->select(['id','name','slug','short_description','addedby_id','created_at'])
         ->whereDate('created_at','<=',date('Y-m-d'))
-        ->paginate(12);
+        ->paginate(16);
         return view(welcomeTheme().'products.latestProducts',compact('products','page'));
       }
 

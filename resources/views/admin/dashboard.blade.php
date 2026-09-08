@@ -13,6 +13,64 @@
     .BillingSummery .Text {
         color: #6c6c6c;
     }
+
+    /* ===== Dashboard stat cards — compact / professional ===== */
+    .grouped-multiple-statistics-card .card{
+        border:1px solid #ecEEF3;
+        border-radius:14px;
+        box-shadow:0 2px 12px rgba(20,30,45,.04);
+    }
+    .grouped-multiple-statistics-card .card-body{ padding:1.1rem .85rem; }
+
+    .grouped-multiple-statistics-card .d-flex.align-items-start{
+        align-items:center !important;
+        gap:13px;
+        padding:8px 14px;
+        margin:0 !important;
+    }
+    .grouped-multiple-statistics-card [class*="border-right-"]{ border:0 !important; }
+    @media (min-width:768px){
+        .grouped-multiple-statistics-card .row > [class*="col-"]:not(:last-child) > .d-flex{
+            border-right:1px solid #eef0f4 !important;
+        }
+    }
+
+    .grouped-multiple-statistics-card .card-icon{
+        width:42px; height:42px; min-width:42px;
+        border-radius:11px;
+        display:flex; align-items:center; justify-content:center;
+        margin:0 !important;
+        box-shadow:none;
+    }
+    .grouped-multiple-statistics-card .card-icon i{
+        font-size:17px !important;
+        padding:0 !important;
+        line-height:1;
+    }
+    .grouped-multiple-statistics-card .card-icon.primary{ background:#e4f6f5; color:#13b5ad; }
+    .grouped-multiple-statistics-card .card-icon.success{ background:#e7f7ee; color:#2bb673; }
+    .grouped-multiple-statistics-card .card-icon.danger { background:#fdeef1; color:#ef6079; }
+    .grouped-multiple-statistics-card .card-icon.warning{ background:#fef2e6; color:#f0972b; }
+
+    .grouped-multiple-statistics-card .stats-amount{ margin:0 !important; flex:1 1 auto; min-width:0; }
+    .grouped-multiple-statistics-card .stats-amount .heading-text{
+        font-size:1.4rem; font-weight:700; line-height:1.1;
+        margin:0 0 2px; color:#2c3345;
+    }
+    .grouped-multiple-statistics-card .stats-amount .sub-heading{
+        font-size:.8rem; color:#8a93a5; margin:0;
+        white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+
+    .grouped-multiple-statistics-card .inc-dec-percentage{ align-self:flex-start; margin-left:auto; }
+    .grouped-multiple-statistics-card .inc-dec-percentage small{
+        display:inline-flex; align-items:center; gap:3px;
+        font-size:.66rem; font-weight:600;
+        padding:3px 8px; border-radius:20px;
+        background:#f1f3f7; color:#7a8496;
+        white-space:nowrap;
+    }
+    .grouped-multiple-statistics-card .inc-dec-percentage small i{ font-size:.6rem; }
 </style>
 @endpush @section('contents')
 <div class="content-header row"></div>

@@ -1,16 +1,16 @@
-@extends(welcomeTheme().'layouts.app') 
-@section('title')
-<title>{{websiteTitle('Cart Items')}}</title>
-@endsection 
-@section('SEO')
-<meta name="title" property="og:title" content="{{websiteTitle('Cart Items')}}" />
-<meta name="description" property="og:description" content="{!!general()->meta_description!!}" />
-<meta name="keyword" property="og:keyword" content="{{general()->meta_keyword}}" />
-<meta name="image" property="og:image" content="{{assetUrl(general()->logo())}}" />
-<meta name="url" property="og:url" content="{{route('carts')}}" />
-<link rel="canonical" href="{{route('carts')}}">
-@endsection 
-@push('css')
+ 
+<?php $__env->startSection('title'); ?>
+<title><?php echo e(websiteTitle('Cart Items')); ?></title>
+<?php $__env->stopSection(); ?> 
+<?php $__env->startSection('SEO'); ?>
+<meta name="title" property="og:title" content="<?php echo e(websiteTitle('Cart Items')); ?>" />
+<meta name="description" property="og:description" content="<?php echo general()->meta_description; ?>" />
+<meta name="keyword" property="og:keyword" content="<?php echo e(general()->meta_keyword); ?>" />
+<meta name="image" property="og:image" content="<?php echo e(assetUrl(general()->logo())); ?>" />
+<meta name="url" property="og:url" content="<?php echo e(route('carts')); ?>" />
+<link rel="canonical" href="<?php echo e(route('carts')); ?>">
+<?php $__env->stopSection(); ?> 
+<?php $__env->startPush('css'); ?>
 
 <style>
     input::-webkit-outer-spin-button,
@@ -170,25 +170,12 @@
     }
 </style>
 
-@endpush 
+<?php $__env->stopPush(); ?> 
 
-@section('contents')
-{{--<div class="singleProHead">
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
-            </ol>
-        </nav>
-    </div>
-</div>--}}
+<?php $__env->startSection('contents'); ?>
+
 <!-- START SECTION SHOP -->
-{{--<div class="section">
-    <div class="container cartItemsList">
-      @include(welcomeTheme().'.carts.includes.cartItems')
-    </div>
-</div>--}}
+
 <!-- END SECTION SHOP -->
 
 
@@ -204,7 +191,7 @@
              </div>
              <div class="col-sm-6">
                <ul class="breadcrumb float-end">
-                 <li class="breadcrumb-item">  <a href="{{route('index')}}">Home  </a></li>
+                 <li class="breadcrumb-item">  <a href="<?php echo e(route('index')); ?>">Home  </a></li>
                  <li class="breadcrumb-item active">  <a href="javascript:void(0)">Cart </a></li>
                </ul>
              </div>
@@ -214,14 +201,14 @@
      </section>
      <section class="section-b-space pt-0">
        <div class="custom-container cartItemsList container">
-            @include(welcomeTheme().'.carts.includes.cartItems')
+            <?php echo $__env->make(welcomeTheme().'.carts.includes.cartItems', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
        </div>
      </section>
 
 
 
-@endsection 
-@push('js') 
+<?php $__env->stopSection(); ?> 
+<?php $__env->startPush('js'); ?> 
 
 <script>
     $(document).ready(function(){
@@ -260,4 +247,5 @@
     });
 </script>
 
-@endpush
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make(welcomeTheme().'layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp\htdocs\amplelab\resources\views/welcome/carts/cart.blade.php ENDPATH**/ ?>

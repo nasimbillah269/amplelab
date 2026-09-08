@@ -11,75 +11,68 @@
 @push('css')
 
 <style>
+  .flexbox-container{ min-height: calc(100vh - 60px); }
+  .flexbox-container .box-shadow-2{ box-shadow:none !important; }
 
-.loginPage {
-    padding: 50px 0;
-    background-color: #f9f9f9;
-}
-.loginForm {
-    padding: 22px 30px;
-    background-color: #fff;
-    border: 1px solid #a01a22;
-}
-.loginForm h4 {
-    text-align: center;
-    font-weight: bold;
-    color: #c56d6d;
-}
-.loginForm .form-label {
-    font-weight: 600;
-    font-size: 14px;
-    color: #726161;
-    margin-bottom: 2px;
-}
-.loginForm .form-control {
-    text-align: left;
-    border-radius: 0;
-    padding: 10px 20px;
-    margin: 0;
-}
-.loginForm  .form-control:focus {
-    border-color: #86b7fe;
-    box-shadow: none;
-}
-.loginForm p {
-    text-align: right;
-}
-.loginForm p a {
-    color: #a01a22;
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    letter-spacing: 1px;
-}
-a.signBtn {
-    display: block;
-    background-color: #000;
-    text-align: center;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 20px;
-    padding: 10px 0;
-    transition-duration: 0.2s;
-}
-.loginForm button.btn-auth {
-    background-color: #a01a22;
-    color: #fff;
-    font-size: 16px;
-    display: block;
-    text-transform: uppercase;
-    border: none;
-    padding: 10px 0;
-    display: block;
-    width: 100%;
-    margin-top: 15px;
-    transition: .2s all;
-    letter-spacing: 1px;
-}
-.loginForm button.btn-auth:hover {
-    background-color: #7a1219;
-}
+  .flexbox-container .card{
+    border:1px solid #e6e8ec;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 24px 60px rgba(20,30,45,.14);
+  }
+  .flexbox-container .card-header{ padding:28px 32px 6px; }
+  .flexbox-container .card-body{ padding:20px 32px 34px; }
+
+  .flexbox-container .card-subtitle span{ font-weight:600; color:#5a6472; }
+
+  /* gap between the input fields */
+  .flexbox-container form .form-group{ margin-bottom:18px; }
+  .flexbox-container form .form-group:last-of-type{ margin-bottom:10px; }
+
+  .flexbox-container .form-control,
+  .flexbox-container .form-control-lg{
+    border-radius:12px;
+    border:1px solid #e3e8ef;
+    background:#f5f7fb;
+    padding:.85rem 1rem .85rem 3rem !important;
+    min-height:52px;
+    height:auto;
+    line-height:1.4;
+    transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .flexbox-container .form-control:focus,
+  .flexbox-container .form-control-lg:focus{
+    background:#fff;
+    border-color:#1cbcb4;
+    box-shadow:0 0 0 3px rgba(28,188,180,.18);
+  }
+  /* left icon — perfectly centered inside the rounded input */
+  .flexbox-container .has-icon-left .form-control-position,
+  .flexbox-container .position-relative .form-control.form-control-lg ~ .form-control-position{
+    top:0 !important;
+    left:0 !important;
+    right:auto !important;
+    width:3rem !important;
+    height:100% !important;
+    line-height:1 !important;
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    color:#9aa4b6;
+    font-size:.95rem;
+    z-index:3;
+  }
+  .flexbox-container .has-icon-left .form-control-position i{ line-height:1; }
+
+  .flexbox-container .chk-remember{ margin-right:6px; vertical-align:middle; }
+
+  .flexbox-container .btn-primary.btn-lg{
+    border-radius:12px;
+    padding:.85rem 1rem;
+    font-weight:600;
+    letter-spacing:.4px;
+    margin-top:6px;
+  }
 </style>
 
 @endpush 
@@ -104,7 +97,7 @@ a.signBtn {
                                 @include(adminTheme().'.alerts')
                                 <form class="form-horizontal form-simple" action="{{route('admin')}}"  method="post">
                                     @csrf
-                                    <fieldset class="form-group position-relative has-icon-left mb-0">
+                                    <fieldset class="form-group position-relative has-icon-left">
                                         <input type="email" class="form-control form-control-lg" name="email"  value="{{old('email')}}" placeholder="Your Email" required="" />
                                         <div class="form-control-position">
                                             <i class="fa-solid fa-envelope"></i>
@@ -116,7 +109,7 @@ a.signBtn {
                                     <fieldset class="form-group position-relative has-icon-left">
                                         <input type="password" class="form-control form-control-lg" name="password" value="{{old('password')}}" placeholder="Enter Password" required="" />
                                         <div class="form-control-position">
-                                            <i class="fa fa-key"></i>
+                                            <i class="fa-solid fa-key"></i>
                                         </div>
                                     </fieldset>
                                     @if($errors->has('password'))

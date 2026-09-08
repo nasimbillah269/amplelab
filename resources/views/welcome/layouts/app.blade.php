@@ -1636,12 +1636,14 @@ header .sub_header ul .onhover-div .shoping-prize, header .sub_header ul li .sho
 <!--</div>-->
 
 
+@if(general()->mobile)
 <div class="whatsapp-tooltip">
     Chat with us
   </div>
-  <a href="https://wa.me/447782273969" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <a href="https://wa.me/{{ preg_replace('/\D+/', '', general()->mobile) }}" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
+@endif
         
         
         <div class="offcanvas offcanvas-end shopping-details" id="offcanvasRight" tabindex="-1" aria-labelledby="offcanvasRightLabel">

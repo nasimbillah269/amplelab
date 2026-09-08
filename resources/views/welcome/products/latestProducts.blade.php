@@ -47,41 +47,28 @@
 </section>
 
 
-{{--<div class="categoryMainDiv">
-    <div class="container">
-        <div class="productsLists">
-            <div class="row">
-                @foreach($products as $product)
-                <div class="col-md-3 col-6">
-                    @include(welcomeTheme().'.products.includes.productCard')
-                </div>
-                @endforeach
-            </div>
-        </div>
-        
-        <div class="paginationPart">
-            {{$products->links('pagination')}}
-        </div>
-    </div>
-</div>--}}
+<section class="section-b-space pt-0">
+  <div class="container">
 
-
-
-
-<section class="section-b-space pt-0"> 
-      <div class="custom-container container">
-        <div class="product-tab-content ratio1_3">
-              <div class="row-cols-lg-4 row-cols-md-3 row-cols-2 grid-section view-option row g-3 g-xl-4">
-                  
-                @foreach($products as $product)
-                
-                 @include(welcomeTheme().'.products.includes.productCard')
-                 
-                @endforeach
-           
-              </div>
-            </div>
+    @if($products->count())
+    <div class="row g-3 g-xl-4">
+      @foreach($products as $product)
+      <div class="col-6 col-md-4 col-lg-3">
+        @include(welcomeTheme().'products.includes.productCard')
       </div>
+      @endforeach
+    </div>
+
+    @if($products instanceof \Illuminate\Contracts\Pagination\Paginator)
+    <div class="paginationPart mt-4">
+      {{ $products->links('pagination') }}
+    </div>
+    @endif
+    @else
+    <p class="text-center text-muted py-5">No product found.</p>
+    @endif
+
+  </div>
 </section>
 
 

@@ -620,7 +620,7 @@
 
 /* ---------------- Buttons ---------------- */
 .btn-alab {
-  background-color: var(--alab-dark);
+  background-color: #003b2e;
   color: #fff;
   padding: 12px 26px;
   border-radius: 6px;
@@ -1116,4 +1116,61 @@
     .filter-tabs{overflow-x:auto; white-space:nowrap; padding-bottom:8px;}
     .filter-tabs .btn{margin-bottom:8px;}
     .stats-bar .stat-item{margin-bottom:20px; justify-content:flex-start;}
+  }
+
+  /* Product card price button — override old theme's ".product-tab-content button{width:16%}" */
+  .product-card .price-btn{ width:auto; align-self:stretch; margin:0 14px 14px; }
+  .product-tab-content .product-card,
+  .product-tab-content .product-card:hover{ text-decoration:none; }
+
+  /* Hero contact card items are links (values from General Settings) */
+  .contact-float-card a.item{ text-decoration:none; color:inherit; transition:background .2s ease; }
+  .contact-float-card a.item:hover{ background:var(--al-bg-soft); border-radius:8px; }
+  .contact-float-card a.item:hover .label{ color:var(--al-green); }
+
+  /* Hero carousel controls */
+  #heroCarousel{ position:relative; }
+  #heroCarousel .carousel-control-prev,
+  #heroCarousel .carousel-control-next{ width:6%; opacity:.6; }
+  #heroCarousel .carousel-control-prev:hover,
+  #heroCarousel .carousel-control-next:hover{ opacity:1; }
+  #heroCarousel .carousel-indicators{ margin-bottom:.5rem; }
+  #heroCarousel .carousel-indicators [data-bs-target]{
+    width:10px; height:10px; border-radius:50%; border:0; background:var(--al-green);
+  }
+
+  /* Hero: on mobile/tablet the slide image sits behind the text — add a light
+     scrim so the dark hero text stays readable (desktop keeps the full image). */
+  @media (max-width: 991.98px){
+    .hero{ position:relative; background-color:#f5f6f1; }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:rgba(245,246,241,.90);
+      z-index:0;
+    }
+    .hero > *{ position:relative; z-index:1; }
+  }
+
+  /* Text selection colour — override theme's pink ::selection */
+  ::selection{ background:#1a73e8; color:#fff; }
+  ::-moz-selection{ background:#1a73e8; color:#fff; }
+
+  /* Hero CTA buttons stay on one row on phones */
+  @media (max-width: 767.98px){
+    .hero .d-flex.flex-wrap{ flex-wrap:nowrap !important; gap:.55rem !important; }
+    .hero .d-flex.flex-wrap > .btn-al-primary,
+    .hero .d-flex.flex-wrap > .btn-al-outline{
+      flex:1 1 0;
+      min-width:0;
+      padding:.6rem .55rem;
+      font-size:.78rem;
+      line-height:1.2;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.35rem;
+      text-align:center;
+    }
   }

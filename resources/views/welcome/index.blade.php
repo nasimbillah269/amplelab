@@ -50,7 +50,7 @@
         </div>
 
         <div class="text-center mt-5">
-            <a href="https://nit.hostrb.com/sub/amplelab1/all-categories" class="btn-al-primary">
+            <a href="{{ route('pageView', 'all-categories') }}" class="btn-al-primary">
                 View All Categories
                 <i class="fa-solid fa-arrow-right ms-2"></i>
             </a>
@@ -263,20 +263,30 @@
 
 <!-- ===== Brands ===== -->
 
+@if($brands->count())
 <section>
-    
+
   <div class="container text-center">
     <h2 class="fw-bold mb-1" style="font-size:1.6rem;">We Work With International Brands</h2>
     <p class="text-muted mb-4">Delivering trusted quality through global partnerships</p>
     <div class="row g-3 justify-content-center">
-      @foreach($brands as $brand) 
-      <div class="col-6 col-md-2"><div class="brand-box" style="font-family:Georgia,serif;">{{$brand->name}}</div></div>
+      @foreach($brands as $brand)
+      <div class="col-6 col-md-2">
+        <a href="{{ route('productBrand', $brand->slug ?: 'no-title') }}" class="brand-box text-decoration-none" style="font-family:Georgia,serif;">
+          @if($brand->imageFile)
+          <img src="{{ assetUrl($brand->image()) }}" alt="{{ $brand->name }}" style="max-height:64px; max-width:100%; object-fit:contain;">
+          @else
+          {{ $brand->name }}
+          @endif
+        </a>
+      </div>
       @endforeach
     </div>
-    <a href="https://nit.hostrb.com/sub/amplelab/all-brands" class="btn-al-primary d-inline-block mt-4">View All Brands</a>
+    <a href="{{ route('pageView', 'all-brands') }}" class="btn-al-primary d-inline-block mt-4">View All Brands</a>
   </div>
-  
+
 </section>
+@endif
 
 
 

@@ -1,13 +1,11 @@
 @if($products->count() > 0)
 
-<div class="row-cols-lg-6 row-cols-md-4 row-cols-2 grid-section view-option row g-3 g-xl-4">
+<div class="row g-3 g-xl-4">
   @foreach($products as $index => $product)
-  <div> 
-    @include(welcomeTheme().'.products.includes.productCard')
-    
+  <div class="col-6 col-md-4 col-lg-3">
+    @include(welcomeTheme().'products.includes.productCard')
   </div>
   @endforeach
-
 </div>
 
 
