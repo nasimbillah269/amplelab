@@ -60,16 +60,49 @@ function assetLinkAdmin(){
 }
 
 /**
+ * Decide whether asset URLs should drop the "public/" segment.
+ *
+ *   - docroot = public/      -> true  (URL is "/medies/x.jpg")
+ *   - docroot = project root -> false (URL is "/public/medies/x.jpg")
+ *
+ * Honours config('app.strip_public_from_assets') when it is explicitly set
+ * (true/false), otherwise auto-detects from the request document root so the
+ * same code works on `php artisan serve` and on cPanel without any .env change.
+ */
+function stripPublicFromAssets(){
+  $cfg = config('app.strip_public_from_assets');
+  if ($cfg !== null) {
+    return (bool) $cfg;
+  }
+
+  static $auto = null;
+  if ($auto !== null) {
+    return $auto;
+  }
+
+  $docroot = isset($_SERVER['DOCUMENT_ROOT'])
+    ? rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']), '/')
+    : '';
+
+  if ($docroot === '') {
+    // CLI / queue — assume the framework's own server (docroot = public/)
+    return $auto = true;
+  }
+
+  $publicPath = str_replace('\\', '/', realpath(public_path()) ?: public_path());
+  $publicPath = rtrim($publicPath, '/');
+
+  return $auto = ($docroot === $publicPath) || str_ends_with($docroot, '/public');
+}
+
+/**
  * Build a public asset URL that works no matter where the document root is.
  *
  * The app stores/produces paths like "public/medies/x.jpg" (also used as
- * filesystem paths). The URL form depends on the server:
- *   - docroot = public/        -> "/medies/x.jpg"        (config strip_public_from_assets = true)
- *   - docroot = project root   -> "/public/medies/x.jpg" (config strip_public_from_assets = false)
- *
- * The path is first normalised (any leading "public/" removed) and then the
- * "public/" segment is re-added only when the server needs it. Full URLs and
- * data URIs are returned untouched. Safe drop-in for asset().
+ * filesystem paths). The path is normalised (any leading "public/" removed)
+ * and the "public/" segment is re-added only when the server serves from the
+ * project root. Full URLs and data URIs are returned untouched.
+ * Safe drop-in for asset().
  */
 function assetUrl($path = null){
   $path = (string) $path;
@@ -80,7 +113,7 @@ function assetUrl($path = null){
 
   $path = preg_replace('#^public/#', '', ltrim($path, '/'));
 
-  if (! config('app.strip_public_from_assets', true)) {
+  if (! stripPublicFromAssets()) {
     $path = 'public/'.$path;
   }
 

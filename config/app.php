@@ -60,12 +60,12 @@ return [
     'asset_url' => env('ASSET_URL'),
 
     /*
-    | Whether the web server document root is the "public" folder.
-    | true  -> docroot = public/  (asset URLs are built WITHOUT a "public/" segment)
-    | false -> docroot = project root (asset URLs keep the "public/" segment)
-    | Set STRIP_PUBLIC_FROM_ASSETS=false in .env on servers that serve from the project root.
+    | How asset URLs handle the "public/" segment.
+    |   not set -> auto-detect from the request document root (recommended)
+    |   true    -> force strip  (docroot = public/, e.g. `php artisan serve`)
+    |   false   -> force keep   (docroot = project root, e.g. cPanel pointing at the app folder)
     */
-    'strip_public_from_assets' => env('STRIP_PUBLIC_FROM_ASSETS', true),
+    'strip_public_from_assets' => env('STRIP_PUBLIC_FROM_ASSETS', null),
 
     /*
     |--------------------------------------------------------------------------
