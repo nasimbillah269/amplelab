@@ -39,7 +39,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/slick.css')); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/slick-theme.css')); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/jquery.fancybox.css')); ?>" />
-        <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('publice/assets/css/jquery.fancybox.min.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/jquery.fancybox.min.css')); ?>" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
