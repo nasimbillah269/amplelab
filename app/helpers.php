@@ -60,17 +60,30 @@ function assetLinkAdmin(){
 }
 
 /**
- * Build a public asset URL without the leading "public/" segment.
+ * Build a public asset URL that works no matter where the document root is.
  *
- * The whole app stores/produces paths like "public/medies/x.jpg" (also used as
- * filesystem paths). When the web server document root is the "public" folder,
- * those must not appear in URLs. This strips a leading "public/" and defers to
- * Laravel's asset() helper. Any path that doesn't start with "public/" is passed
- * through unchanged, so it is a safe drop-in for asset().
+ * The app stores/produces paths like "public/medies/x.jpg" (also used as
+ * filesystem paths). The URL form depends on the server:
+ *   - docroot = public/        -> "/medies/x.jpg"        (config strip_public_from_assets = true)
+ *   - docroot = project root   -> "/public/medies/x.jpg" (config strip_public_from_assets = false)
+ *
+ * The path is first normalised (any leading "public/" removed) and then the
+ * "public/" segment is re-added only when the server needs it. Full URLs and
+ * data URIs are returned untouched. Safe drop-in for asset().
  */
 function assetUrl($path = null){
-  $path = ltrim((string) $path, '/');
-  $path = preg_replace('#^public/#', '', $path);
+  $path = (string) $path;
+
+  if ($path === '' || preg_match('#^(https?:)?//#i', $path) || str_starts_with($path, 'data:')) {
+    return $path;
+  }
+
+  $path = preg_replace('#^public/#', '', ltrim($path, '/'));
+
+  if (! config('app.strip_public_from_assets', true)) {
+    $path = 'public/'.$path;
+  }
+
   return asset($path);
 }
 
