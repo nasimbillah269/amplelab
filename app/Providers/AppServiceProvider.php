@@ -19,6 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+    $general = general();
+
+    if (!$general) {
+        return;
+    }
         //
         \Config::set("services.facebook.client_id", general()->fb_app_id);
         \Config::set("services.facebook.client_secret", general()->fb_app_secret);
