@@ -75,33 +75,16 @@ function stripPublicFromAssets(){
     return (bool) $cfg;
   }
 
-  $norm = function ($p) {
-    if (! is_string($p) || $p === '') {
-      return '';
-    }
-    $real = @realpath($p);
-    return rtrim(str_replace('\\', '/', $real !== false ? $real : $p), '/');
-  };
-
-  $docroot = $norm($_SERVER['DOCUMENT_ROOT'] ?? '');
+  $docroot = rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT'] ?? ''), '/');
   if ($docroot === '') {
     return true; // CLI / queue / unknown
   }
 
-  $publicPath = $norm(public_path());
-
-  // The web server's document root IS the public folder  ->  drop "public/".
-  if ($docroot === $publicPath || str_ends_with($docroot, '/public')) {
-    return true;
-  }
-
-  // The public folder lives *below* the document root (e.g. cPanel serving the
-  // whole project) -> assets are only reachable through a "public/" segment.
-  if ($publicPath !== '' && str_starts_with($publicPath.'/', $docroot.'/')) {
-    return false;
-  }
-
-  return true; // fallback: assume a standard Laravel (public/) document root
+  // Document root ends at the framework's "public" folder (php artisan serve,
+  // or a host pointed at .../public)         -> URLs must NOT contain "public/".
+  // Anything else — the whole project is served from its own root (typical on
+  // cPanel shared hosting)                   -> URLs MUST keep "public/".
+  return str_ends_with($docroot, '/public') || str_ends_with($docroot, '/public/');
 }
 
 /**
