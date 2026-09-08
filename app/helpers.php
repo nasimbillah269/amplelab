@@ -51,13 +51,26 @@ function welcomeTheme(){
   return $theme;
 }
 
-function assetLink(){
-  return 'public/'.general()->theme;
+// function assetLink(){
+//   return 'public/'.general()->theme;
+// }
+
+// function assetLinkAdmin(){
+//   return 'public/'.general()->adminTheme;
+// }
+
+
+function assetLink()
+{
+    return general()->theme;
 }
 
-function assetLinkAdmin(){
-  return 'public/'.general()->adminTheme;
+function assetLinkAdmin()
+{
+    return general()->adminTheme;
 }
+
+
 
 /**
  * Decide whether asset URLs should drop the "public/" segment.
