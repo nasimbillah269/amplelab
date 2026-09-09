@@ -61,23 +61,49 @@ function assetLinkAdmin(){
 }
 
 /**
- * Build a public asset URL without the leading "public/" segment.
+ * Decide whether asset URLs should drop the "public/" segment.
  *
- * The whole app stores/produces paths like "public/medies/x.jpg" (also used as
- * filesystem paths). When the web server document root is the "public" folder,
- * those must not appear in URLs. This strips a leading "public/" and defers to
- * Laravel's asset() helper. Any path that doesn't start with "public/" is passed
- * through unchanged, so it is a safe drop-in for asset().
+ *   - document root IS the framework's public/ folder  -> true  ("/medies/x.jpg")
+ *     (php artisan serve, Valet/Herd, or a host pointed at .../public)
+ *   - document root is the project root                -> false ("/public/medies/x.jpg")
+ *     (typical cPanel shared hosting)
+ *
+ * Honours config('app.strip_public_from_assets') when explicitly set to
+ * true/false in .env; otherwise auto-detects from the request document root so
+ * the same code works locally and on live without an .env change.
+ */
+function stripPublicFromAssets(){
+  $cfg = config('app.strip_public_from_assets');
+  if ($cfg !== null) {
+    return (bool) $cfg;
+  }
+
+  $docroot = rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT'] ?? ''), '/');
+  if ($docroot === '') {
+    return false; // CLI / queue / unknown -> keep "public/" (safe for live)
+  }
+
+  return str_ends_with($docroot, '/public');
+}
+
+/**
+ * Build a public asset URL that works no matter where the document root is.
+ *
+ * The app stores/produces paths like "public/medies/x.jpg" (also used as
+ * filesystem paths). Any leading "public/" is normalised away, then re-added
+ * only when the server serves from the project root. Full URLs and data URIs
+ * pass through untouched. Safe drop-in for asset().
  */
 function assetUrl($path = null){
-  $path = ltrim((string) $path, '/');
-  $path = preg_replace('#^public/#', '', $path);
+  $path = (string) $path;
 
-  // Hosts whose document root is the project root (e.g. cPanel/live) need the
-  // "public/" segment kept in the URL. Controlled per-environment:
-  //   STRIP_PUBLIC_FROM_ASSETS=true  -> drop "public/"  (local)
-  //   STRIP_PUBLIC_FROM_ASSETS=false -> keep "public/"  (live)
-  if (config('app.strip_public_from_assets') === false) {
+  if ($path === '' || preg_match('#^(https?:)?//#i', $path) || str_starts_with($path, 'data:')) {
+    return $path;
+  }
+
+  $path = preg_replace('#^public/#', '', ltrim($path, '/'));
+
+  if (! stripPublicFromAssets()) {
     $path = 'public/'.$path;
   }
 
