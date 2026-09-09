@@ -12,6 +12,7 @@ use Carbon\Carbon;
 
 
 function general(){
+  if (!\Schema::hasTable('generals') ) return null;
   return $general =General::first();
 }
 
@@ -51,74 +52,32 @@ function welcomeTheme(){
   return $theme;
 }
 
-// function assetLink(){
-//   return 'public/'.general()->theme;
-// }
-
-// function assetLinkAdmin(){
-//   return 'public/'.general()->adminTheme;
-// }
-
-
-function assetLink()
-{
-    return general()->theme;
+function assetLink(){
+  return 'public/'.general()->theme;
 }
 
-function assetLinkAdmin()
-{
-    return general()->adminTheme;
-}
-
-
-
-/**
- * Decide whether asset URLs should drop the "public/" segment.
- *
- *   - docroot = public/      -> true  (URL is "/medies/x.jpg")
- *   - docroot = project root -> false (URL is "/public/medies/x.jpg")
- *
- * Honours config('app.strip_public_from_assets') when it is explicitly set
- * (true/false), otherwise auto-detects from the request document root so the
- * same code works on `php artisan serve` and on cPanel without any .env change.
- */
-function stripPublicFromAssets(){
-  $cfg = config('app.strip_public_from_assets');
-  if ($cfg !== null) {
-    return (bool) $cfg;
-  }
-
-  $docroot = rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT'] ?? ''), '/');
-  if ($docroot === '') {
-    return true; // CLI / queue / unknown
-  }
-
-  // Document root ends at the framework's "public" folder (php artisan serve,
-  // or a host pointed at .../public)         -> URLs must NOT contain "public/".
-  // Anything else — the whole project is served from its own root (typical on
-  // cPanel shared hosting)                   -> URLs MUST keep "public/".
-  return str_ends_with($docroot, '/public') || str_ends_with($docroot, '/public/');
+function assetLinkAdmin(){
+  return 'public/'.general()->adminTheme;
 }
 
 /**
- * Build a public asset URL that works no matter where the document root is.
+ * Build a public asset URL without the leading "public/" segment.
  *
- * The app stores/produces paths like "public/medies/x.jpg" (also used as
- * filesystem paths). The path is normalised (any leading "public/" removed)
- * and the "public/" segment is re-added only when the server serves from the
- * project root. Full URLs and data URIs are returned untouched.
- * Safe drop-in for asset().
+ * The whole app stores/produces paths like "public/medies/x.jpg" (also used as
+ * filesystem paths). When the web server document root is the "public" folder,
+ * those must not appear in URLs. This strips a leading "public/" and defers to
+ * Laravel's asset() helper. Any path that doesn't start with "public/" is passed
+ * through unchanged, so it is a safe drop-in for asset().
  */
 function assetUrl($path = null){
-  $path = (string) $path;
+  $path = ltrim((string) $path, '/');
+  $path = preg_replace('#^public/#', '', $path);
 
-  if ($path === '' || preg_match('#^(https?:)?//#i', $path) || str_starts_with($path, 'data:')) {
-    return $path;
-  }
-
-  $path = preg_replace('#^public/#', '', ltrim($path, '/'));
-
-  if (! stripPublicFromAssets()) {
+  // Hosts whose document root is the project root (e.g. cPanel/live) need the
+  // "public/" segment kept in the URL. Controlled per-environment:
+  //   STRIP_PUBLIC_FROM_ASSETS=true  -> drop "public/"  (local)
+  //   STRIP_PUBLIC_FROM_ASSETS=false -> keep "public/"  (live)
+  if (config('app.strip_public_from_assets') === false) {
     $path = 'public/'.$path;
   }
 
