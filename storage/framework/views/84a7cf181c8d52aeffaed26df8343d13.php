@@ -21,25 +21,25 @@
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
      <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
      <!-- Font Awesome-->
-     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/vendors/fontawesome.css')); ?>" />
+     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/vendors/fontawesome.css')); ?>" />
      <!-- Iconsax icon-->
-     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/vendors/iconsax.css')); ?>" />
+     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/vendors/iconsax.css')); ?>" />
      <!-- Bootstrap css-->
-     <link rel="stylesheet" type="text/css" id="rtl-link" href="<?php echo e(assetUrl('public/assets/css/vendors/bootstrap.css')); ?>" />
-     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/vendors/swiper-slider/swiper-bundle.min.css')); ?>" />
-     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/vendors/toastify.css')); ?>" />
-     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/style.css')); ?>" />
-     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/newStyle.css')); ?>" />
-     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/productsdeta.css')); ?>" />
-     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/coustomeV1.css')); ?>" />
-     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/respon.css')); ?>" />
-     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/amplelabStyle.css')); ?>" />
+     <link rel="stylesheet" type="text/css" id="rtl-link" href="<?php echo e(assetUrl('assets/css/vendors/bootstrap.css')); ?>" />
+     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/vendors/swiper-slider/swiper-bundle.min.css')); ?>" />
+     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/vendors/toastify.css')); ?>" />
+     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/style.css')); ?>" />
+     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/newStyle.css')); ?>" />
+     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/productsdeta.css')); ?>" />
+     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/coustomeV1.css')); ?>" />
+     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/respon.css')); ?>" />
+     <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/amplelabStyle.css')); ?>" />
      
        <!-- Slick Slider CSS CDN-->
-        <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/slick.css')); ?>" />
-        <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/slick-theme.css')); ?>" />
-        <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/jquery.fancybox.css')); ?>" />
-        <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('public/assets/css/jquery.fancybox.min.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/slick.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/slick-theme.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/jquery.fancybox.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(assetUrl('assets/css/jquery.fancybox.min.css')); ?>" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1673,36 +1673,36 @@ header .sub_header ul .onhover-div .shoping-prize, header .sub_header ul li .sho
 
 
 <!-- Bootstrap js-->
-     <script src="<?php echo e(assetUrl('public/assets/js/bootstrap/bootstrap.bundle.min.js')); ?>"></script>
+     <script src="<?php echo e(assetUrl('assets/js/bootstrap/bootstrap.bundle.min.js')); ?>"></script>
      <!-- iconsax js -->
-     <script src="<?php echo e(assetUrl('public/assets/js/iconsax.js')); ?>"> </script>
+     <script src="<?php echo e(assetUrl('assets/js/iconsax.js')); ?>"> </script>
      <!-- cursor js-->
-     <script src="<?php echo e(assetUrl('public/assets/js/stats.min.js')); ?>"> </script>
-     <!--<script src="<?php echo e(assetUrl('public/assets/js/cursor.js')); ?>"> </script>-->
-     <script src="<?php echo e(assetUrl('public/assets/js/swiper-slider/swiper-bundle.min.js')); ?>"></script>
-     <script src="<?php echo e(assetUrl('public/assets/js/swiper-slider/swiper-custom.js')); ?>"></script>
-     <script src="<?php echo e(assetUrl('public/assets/js/countdown.js')); ?>"></script>
-     <script src="<?php echo e(assetUrl('public/assets/js/newsletter.js')); ?>"></script>
-     <script src="<?php echo e(assetUrl('public/assets/js/skeleton-loader.js')); ?>"></script>
+     <script src="<?php echo e(assetUrl('assets/js/stats.min.js')); ?>"> </script>
+     <!--<script src="<?php echo e(assetUrl('assets/js/cursor.js')); ?>"> </script>-->
+     <script src="<?php echo e(assetUrl('assets/js/swiper-slider/swiper-bundle.min.js')); ?>"></script>
+     <script src="<?php echo e(assetUrl('assets/js/swiper-slider/swiper-custom.js')); ?>"></script>
+     <script src="<?php echo e(assetUrl('assets/js/countdown.js')); ?>"></script>
+     <script src="<?php echo e(assetUrl('assets/js/newsletter.js')); ?>"></script>
+     <script src="<?php echo e(assetUrl('assets/js/skeleton-loader.js')); ?>"></script>
      <!-- touchspin-->
-     <script src="<?php echo e(assetUrl('public/assets/js/touchspin.js')); ?>"></script>
+     <script src="<?php echo e(assetUrl('assets/js/touchspin.js')); ?>"></script>
      <!-- cookie js-->
-     <script src="<?php echo e(assetUrl('public/assets/js/cookie.js')); ?>"></script>
+     <script src="<?php echo e(assetUrl('assets/js/cookie.js')); ?>"></script>
      <!-- tost js -->
-     <script src="<?php echo e(assetUrl('public/assets/js/toastify.js')); ?>"></script>
-     <script src="<?php echo e(assetUrl('public/assets/js/theme-setting.js')); ?>"></script>
+     <script src="<?php echo e(assetUrl('assets/js/toastify.js')); ?>"></script>
+     <script src="<?php echo e(assetUrl('assets/js/theme-setting.js')); ?>"></script>
      <!-- Theme js-->
-     <script src="<?php echo e(assetUrl('public/assets/js/script.js')); ?>"></script>
+     <script src="<?php echo e(assetUrl('assets/js/script.js')); ?>"></script>
      
              <!-- Bootstrap Script  CDN-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
      
            <!-- Custom Script for this Design -->
         
-        <script src="<?php echo e(assetUrl('public/assets/js/animation.js')); ?>"></script>
-        <script src="<?php echo e(assetUrl('public/assets/js/slick.js')); ?>"></script>
-        <script src="<?php echo e(assetUrl('public/assets/js/slick.min.js')); ?>"></script>
-        <script src="<?php echo e(assetUrl('public/assets/js/jquery.fancybox.min.js')); ?>"></script>
+        <script src="<?php echo e(assetUrl('assets/js/animation.js')); ?>"></script>
+        <script src="<?php echo e(assetUrl('assets/js/slick.js')); ?>"></script>
+        <script src="<?php echo e(assetUrl('assets/js/slick.min.js')); ?>"></script>
+        <script src="<?php echo e(assetUrl('assets/js/jquery.fancybox.min.js')); ?>"></script>
      
          <!-- Slick Slider JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
